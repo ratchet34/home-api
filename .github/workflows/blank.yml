@@ -36,7 +36,7 @@ jobs:
 
       # Step 5: Build Docker image
       - name: Build Docker Image
-        run: docker build --platform linux/arm64 -t "home-api" .
+        run: docker build -t "home-api" .
 
       # Step 6: Tag Docker image
       - name: Tag Docker Image
