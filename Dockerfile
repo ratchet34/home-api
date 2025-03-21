@@ -1,6 +1,6 @@
 # Set the base image with the specified Node.js version
 ARG NODE_VERSION=23.10.0
-FROM node:${NODE_VERSION}-alpine
+FROM --platform=linux/ARM64 node:${NODE_VERSION}-alpine
 
 # Set the environment variable for Node.js to run in production mode
 ENV NODE_ENV=production
