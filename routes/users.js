@@ -1,6 +1,6 @@
 
-const { client } = require('../client');
-const { checkLogin, listUsers } = require('./users');
+const { client } = require('../controllers/client');
+const { checkLogin, listUsers } = require('../controllers/users/users');
 
 const createUsersRoutes = (app) => {
   app.post('/users/login', async (req, res) => {
