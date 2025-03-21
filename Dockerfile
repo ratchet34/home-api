@@ -10,7 +10,8 @@ WORKDIR /usr/src/app
 
 # Install dependencies by leveraging Docker's caching
 # Use bind mounts to package.json and package-lock.json for faster builds
-RUN --mount=type=bind,source=package.json,target=package.json \
+RUN --platform=linux/arm64 \
+    --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
     --mount=type=cache,target=/root/.npm \
     npm ci --omit=dev
