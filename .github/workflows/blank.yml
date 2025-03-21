@@ -38,7 +38,11 @@ jobs:
       - name: Build Docker Image
         run: docker build -t "home-api" .
 
-      # Step 6: Optional: Log in to Docker Hub and push Docker image
+      # Step 6: Tag Docker image
+      - name: Tag Docker Image
+        run: docker tag home-api ${{ secrets.DOCKER_HUB_USERNAME }}/home-api
+
+      # Step 7: Optional: Log in to Docker Hub and push Docker image
       # Uncomment these steps if you want to push the Docker image to Docker Hub
       # Ensure you have added DOCKER_HUB_USERNAME and DOCKER_HUB_TOKEN secrets in your GitHub repository
 
