@@ -1,4 +1,4 @@
-const { getTasks, createTask, updateTask, deleteTask } = require('../controllers/tasks/tasks');
+const { getTasks, createTask, updateTask, deleteTask, getUserTasks } = require('../controllers/tasks/tasks');
 
 const createTasksRoutes = (app) => {
   app.get('/tasks', async (req, res) => {
@@ -23,6 +23,12 @@ const createTasksRoutes = (app) => {
     const { id } = req.params;
     const result = await deleteTask(id);
     res.send(result);
+  });
+
+  app.get('/tasks/user/:userId', async (req, res) => {
+    const { userId } = req.params;
+    const tasks = await getUserTasks(userId);
+    res.send(tasks);
   });
 };
 

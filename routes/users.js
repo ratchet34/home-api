@@ -12,12 +12,13 @@ const createUsersRoutes = (app) => {
     
         // store user information in session, typically a user id
         req.session.user = result._id.toString();
+        req.session.username = result.username;
     
         // save the session before redirection to ensure page
         // load does not happen before session is saved
         req.session.save(function (err) {
           if (err) return next(err)
-          res.send('You are now logged in.');
+          res.send(result);
         })
       })
     } else {
@@ -41,7 +42,10 @@ const createUsersRoutes = (app) => {
 
   app.get('/users/check-auth', (req, res) => {
     if (req.session.user) {
-      res.send({ loggedIn: true });
+      res.send({ user: {
+        id: req.session.user,
+        username: req.session.username
+      }, loggedIn: true });
     } else {
       res.status(401).send({ loggedIn: false });
     }

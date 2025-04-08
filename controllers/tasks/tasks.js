@@ -21,4 +21,9 @@ const deleteTask = async (id) => {
   return result;
 }
 
-module.exports = { getTasks, createTask, updateTask, deleteTask };
+const getUserTasks = async (userId) => {
+  const tasks = await client.db('home').collection('tasks').find({ owner: userId }).toArray();
+  return tasks;
+}
+
+module.exports = { getTasks, createTask, updateTask, deleteTask, getUserTasks };
