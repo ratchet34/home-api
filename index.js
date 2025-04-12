@@ -40,6 +40,7 @@ app.use(session({
   cookie: {
     secure: true, // Ensure secure is set to true for HTTPS
     sameSite: 'none', // Required for cross-origin cookies
+    httpOnly: true, // Prevents JavaScript from accessing the cookie
    }
 }));
 
