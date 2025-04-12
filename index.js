@@ -2,8 +2,8 @@ require('dotenv').config();
 
 const express = require('express');
 const https = require('https');
-const privateKey  = fs.readFileSync(import.meta.env.PRIVATEKEY, 'utf8');
-const certificate = fs.readFileSync(import.meta.env.CERTIFICATE, 'utf8');
+const privateKey  = fs.readFileSync(process.env.PRIVATEKEY, 'utf8');
+const certificate = fs.readFileSync(process.env.CERTIFICATE, 'utf8');
 const cors = require('cors');
 const session = require('express-session');
 const { client } = require('./controllers/client');
