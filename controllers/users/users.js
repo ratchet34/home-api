@@ -3,7 +3,7 @@ const crypto = require('crypto');
 
 const checkLogin = async (username, password) => {
   const hashedPassword = crypto.createHash('sha1').update(password).digest('hex');
-  const user = await client.db('home').collection('users').findOne({ username, hashedPassword });
+  const user = await client.db('home').collection('users').findOne({ username, password: hashedPassword });
   if (user) {
     return user;
   }
