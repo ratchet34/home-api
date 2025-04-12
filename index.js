@@ -1,6 +1,9 @@
 require('dotenv').config();
 
 const express = require('express');
+const https = require('https');
+const privateKey  = fs.readFileSync(import.meta.env.PRIVATEKEY, 'utf8');
+const certificate = fs.readFileSync(import.meta.env.CERTIFICATE, 'utf8');
 const cors = require('cors');
 const session = require('express-session');
 const { client } = require('./controllers/client');
@@ -8,6 +11,8 @@ const { checkAuth } = require('./controllers/users/users');
 const { createUsersRoutes } = require('./routes/users');
 const { createTasksRoutes } = require('./routes/tasks');
 const { createShoppingItemsRoutes, createShoppingIndredientsRoutes, createShoppingLocationsRoutes } = require('./routes/shopping');
+
+const credentials = {key: privateKey, cert: certificate};
 const app = express();
 
 client.connect();
@@ -15,7 +20,7 @@ client.connect();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors({credentials: true, origin: 'http://localhost:5173'}));
+app.use(cors({credentials: true, origin: ['http://localhost:5173', 'http://ratchet34-home.duckdns.org:8080'] }));
 
 app.use(session({
   secret: process.env.SECRET,
@@ -39,6 +44,8 @@ createShoppingItemsRoutes(app);
 createShoppingIndredientsRoutes(app);
 createShoppingLocationsRoutes(app);
 
-app.listen(3000, () => {
+const httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(3000, () => {
   console.log('Server running on port 3000');
 });
