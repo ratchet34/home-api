@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const https = require('https');
+const fs = require('fs');
 const privateKey  = fs.readFileSync(process.env.PRIVATEKEY, 'utf8');
 const certificate = fs.readFileSync(process.env.CERTIFICATE, 'utf8');
 const cors = require('cors');
