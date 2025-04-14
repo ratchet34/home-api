@@ -44,8 +44,9 @@ const createUsersRoutes = (app) => {
     if (req.session.user) {
       res.send({
         user: {
-          id: req.session.user,
+          _id: req.session.user,
           username: req.session.username,
+          notificationsEnabled: !!req.session.deviceToken,
         },
         loggedIn: true,
       });

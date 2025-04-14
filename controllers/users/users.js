@@ -13,7 +13,7 @@ const checkLogin = async (username, password) => {
   if (user) {
     delete user.password; // Remove password from the user object before returning
     user.notificationsEnabled = !!user?.deviceToken; // Check if notifications are enabled
-    delete user.deviceTokens; // Remove deviceTokens from the user object before returning
+    delete user.deviceToken; // Remove deviceTokens from the user object before returning
     return user;
   }
   return false;
