@@ -7,7 +7,7 @@ const getIngredients = async () => {
 }
 
 const createIngredient = async (ingredient) => {
-  const existingIngredient = await client.db('home').collection('ingredient-dictionary').findOne({ name: ingredient.name });
+  const existingIngredient = await client.db('home').collection('ingredient-dictionary').findOne({ title: ingredient.title });
   if (existingIngredient) {
     return { error: 'Ingredient already exists' };
   }
