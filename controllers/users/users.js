@@ -12,8 +12,8 @@ const checkLogin = async (username, password) => {
     .findOne({ username, password: hashedPassword });
   if (user) {
     delete user.password; // Remove password from the user object before returning
-    user.notificationsEnabled = !!user?.deviceToken; // Check if notifications are enabled
-    delete user.deviceToken; // Remove deviceTokens from the user object before returning
+    user.notificationsEnabled = !!user?.deviceTokens; // Check if notifications are enabled
+    delete user.deviceTokens; // Remove deviceTokenss from the user object before returning
     return user;
   }
   return false;

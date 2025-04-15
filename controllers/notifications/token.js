@@ -7,8 +7,8 @@ async function getFcmTokenById(id) {
       .db("home")
       .collection("users")
       .findOne({ _id: mongodb.ObjectId.createFromHexString(id) });
-    if (result.deviceToken) {
-      return result.deviceToken;
+    if (result.deviceTokens && result.deviceTokens.length > 0) {
+      return result.deviceTokens;
     } else {
       console.error("No device tokens found for this user.");
     }
@@ -20,12 +20,22 @@ async function getFcmTokenById(id) {
 
 async function addTokenToUser(id, token) {
   try {
+    const user = await client
+      .db("home")
+      .collection("users")
+      .findOne({ _id: mongodb.ObjectId.createFromHexString(id) });
+
+    if (user && user.deviceTokens && user.deviceTokens.includes(token)) {
+      console.log("Token already exists for this user.");
+      return { acknowledged: true, modifiedCount: 0 };
+    }
+
     const result = await client
       .db("home")
       .collection("users")
       .updateOne(
         { _id: mongodb.ObjectId.createFromHexString(id) },
-        { $set: { deviceToken: token } }
+        { $addToSet: { deviceTokens: token } }
       );
     return result;
   } catch (error) {

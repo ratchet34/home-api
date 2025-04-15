@@ -46,7 +46,7 @@ const createUsersRoutes = (app) => {
         user: {
           _id: req.session.user,
           username: req.session.username,
-          notificationsEnabled: !!req.session.deviceToken,
+          notificationsEnabled: !!req.session.deviceTokens,
         },
         loggedIn: true,
       });

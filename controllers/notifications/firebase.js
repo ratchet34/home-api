@@ -31,9 +31,9 @@ async function sendMessageToDevice(token, message) {
 
 async function sendMessageToUser(id, message) {
   try {
-    const token = await getFcmTokenById(id);
-    if (!!token) {
-      sendMessageToDevice(token, message);
+    const tokens = await getFcmTokenById(id);
+    if (!!tokens && tokens.length > 0) {
+      tokens.forEach((token) => sendMessageToDevice(token, message));
     } else {
       console.error("No device tokens found for this user.");
     }
