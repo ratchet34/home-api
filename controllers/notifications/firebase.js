@@ -16,7 +16,7 @@ async function sendMessageToDevice(token, message) {
     const payload = {
       token,
       notification: {
-        title: message.title,
+        title: "Home: " + message.title,
         body: message.body,
       },
     };
