@@ -12,6 +12,7 @@ const {
   createShoppingIndredientsRoutes,
   createShoppingLocationsRoutes,
 } = require("./routes/shopping");
+const { createRecipesRoutes } = require("./routes/recipes");
 
 const app = express();
 
@@ -47,6 +48,7 @@ createTasksRoutes(app);
 createShoppingItemsRoutes(app);
 createShoppingIndredientsRoutes(app);
 createShoppingLocationsRoutes(app);
+createRecipesRoutes(app);
 
 if (process.env.NODE_ENV === "production") {
   // const https = require('https');
